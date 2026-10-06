@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>تولدم مبارکه 🎂</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Tahoma, Arial, sans-serif;
+      color: white;
+
+      background:
+        radial-gradient(circle at 10% 10%, #a855f7 0%, transparent 30%),
+        radial-gradient(circle at 90% 90%, #ec4899 0%, transparent 30%),
+        linear-gradient(135deg, #160022, #35105f, #67168f);
+
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 700px;
+      margin: auto;
+      padding: 25px 15px 50px;
+    }
+
+    .card {
+      margin-top: 20px;
+      padding: 35px 25px;
+      border-radius: 30px;
+
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+
+      text-align: center;
+    }
+
+    .cake {
+      font-size: 75px;
+      animation: floating 3s ease-in-out infinite;
+    }
+
+    @keyframes floating {
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+
+    h1 {
+      margin-top: 15px;
+      font-size: 34px;
+      line-height: 1.6;
+    }
+
+    .subtitle {
+      margin-top: 10px;
+      margin-bottom: 25px;
+      font-size: 17px;
+      line-height: 2;
+      opacity: 0.9;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    .start-btn,
+    .send-btn {
+      width: 100%;
+      border: none;
+      border-radius: 18px;
+      padding: 17px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.25s;
+    }
+
+    .start-btn {
+      color: white;
+      background: linear-gradient(90deg, #ec4899, #8b5cf6);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .start-btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .form-section {
+      display: none;
+      margin-top: 25px;
+      animation: appear 0.5s ease;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .input {
+      width: 100%;
+      margin-top: 14px;
+      padding: 15px 17px;
+
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      outline: none;
+
+      background: rgba(255, 255, 255, 0.12);
+      color: white;
+
+      font-family: inherit;
+      font-size: 16px;
+    }
+
+    .input::placeholder {
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .input:focus {
+      border-color: white;
+    }
+
+    textarea.input {
+      min-height: 140px;
+      resize: vertical;
+      line-height: 1.8;
+    }
+
+    .send-btn {
+      margin-top: 17px;
+      background: white;
+      color: #6716a0;
+    }
+
+    .send-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .send-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .success,
+    .error {
+      display: none;
+      margin-top: 20px;
+      padding: 18px;
+      border-radius: 16px;
+      line-height: 2;
+    }
+
+    .success {
+      background: rgba(0, 255, 150, 0.15);
+      border: 1px solid rgba(0, 255, 150, 0.3);
+    }
+
+    .error {
+      background: rgba(255, 70, 70, 0.15);
+      border: 1px solid rgba(255, 100, 100, 0.3);
+    }
+
+    .social-title {
+      margin-top: 35px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      opacity: 0.85;
+    }
+
+    .socials {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .social {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 11px 15px;
+      border-radius: 14px;
+
+      color: white;
+      text-decoration: none;
+
+      background: rgba(255, 255, 255, 0.11);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+
+      transition: 0.2s;
+    }
+
+    .social:hover {
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .social-icon {
+      font-size: 21px;
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 12px;
+      opacity: 0.5;
+    }
+
+    /* Confetti */
+
+    .confetti {
+      position: fixed;
+      top: -25px;
+
+      width: 9px;
+      height: 14px;
+
+      pointer-events: none;
+      z-index: 9999;
+
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(720deg);
+      }
+    }
+
+    @media (max-width: 500px) {
+      .container {
+        padding: 18px 12px 40px;
+      }
+
+      .card {
+        padding: 28px 17px;
+      }
+
+      .cake {
+        font-size: 65px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .subtitle {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="card">
+
+      <div class="cake">🎂</div>
+
+      <h1>
+        تولدم مبارکه! 🎉
+      </h1>
+
+      <div class="subtitle">
+        ۱۴ مهر — روز جشن و شادی 💜
+        <br>
+        خوشحالم که اینجایی!
+      </div>
+
+      <button
+        class="start-btn"
+        onclick="startParty()">
+        🎊 شروع جشن
+      </button>
+
+
+      <!-- فرم تبریک -->
+
+      <div
+        class="form-section"
+        id="formSection">
+
+        <input
+          class="input"
+          id="firstName"
+          type="text"
+          placeholder="نام"
+          maxlength="50">
+
+        <input
+          class="input"
+          id="lastName"
+          type="text"
+          placeholder="نام خانوادگی"
+          maxlength="70">
+
+        <textarea
+          class="input"
+          id="message"
+          placeholder="هر متنی که دوست داری برای من بنویس... 💜"
+          maxlength="1000"></textarea>
+
+        <button
+          class="send-btn"
+          id="sendButton"
+          onclick="sendMessage()">
+
+          💌 ارسال تبریک
+
+        </button>
+
+
+        <div
+          class="success"
+          id="success">
+
+          🎉 پیام تو با موفقیت ارسال شد!
+          <br>
+          ممنون که تولدم رو تبریک گفتی 💜
+
+        </div>
+
+
+        <div
+          class="error"
+          id="error">
+
+          ❌ ارسال پیام با مشکل مواجه شد.
+          <br>
+          لطفاً دوباره امتحان کن.
+
+        </div>
+
+      </div>
+
+
+      <!-- شبکه های اجتماعی -->
+
+      <div class="social-title">
+        من رو در شبکه‌های اجتماعی هم پیدا کن 👇
+      </div>
+
+      <div class="socials">
+
+        <a
+          class="social"
+          href="https://rubika.ir/Aliawsr1553"
+          target="_blank"
+          rel="noopener noreferrer">
+
+          <span class="social-icon">💬</span>
+          روبیکا
+
+        </a>
+
+
+        <a
+          class="social"
+          href="https://t.me/Aliawsr1553"
+          target="_blank"
+          rel="noopener noreferrer">
+
+          <span class="social-icon">✈️</span>
+          تلگرام
+
+        </a>
+
+
+        <a
+          class="social"
+          href="https://instagram.com/K.asprion"
+          target="_blank"
+          rel="noopener noreferrer">
+
+          <span class="social-icon">📸</span>
+          اینستاگرام
+
+        </a>
+
+      </div>
+
+
+      <footer>
+        ساخته شده با 💜 برای یک روز خاص
+      </footer>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    /*
+      آدرس Google Apps Script
+    */
+
+    const GOOGLE_SCRIPT_URL =
+      "https://script.google.com/macros/s/AKfycbzIkbMCxcV8lDlhWzUTzV7GZZZfdSdjxCotvvhF4a6AyiLICH8TSydzQ_5ImwaVOdmY/exec";
+
+
+    /*
+      شروع جشن
+    */
+
+    function startParty() {
+
+      const form =
+        document.getElementById("formSection");
+
+      form.style.display = "block";
+
+      createConfetti(100);
+
+      form.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    }
+
+
+    /*
+      ساخت کاغذ رنگی
+    */
+
+    function createConfetti(amount) {
+
+      const colors = [
+        "#ff4fa3",
+        "#ffd166",
+        "#7cffcb",
+        "#ffffff",
+        "#9b5cff",
+        "#4ddcff"
+      ];
+
+      for (let i = 0; i < amount; i++) {
+
+        const confetti =
+          document.createElement("div");
+
+        confetti.className = "confetti";
+
+        confetti.style.left =
+          Math.random() * 100 + "vw";
+
+        confetti.style.background =
+          colors[
+            Math.floor(
+              Math.random() * colors.length
+            )
+          ];
+
+        confetti.style.animationDuration =
+          (2.5 + Math.random() * 3) + "s";
+
+        confetti.style.animationDelay =
+          Math.random() * 1.5 + "s";
+
+        document.body.appendChild(confetti);
+
+        setTimeout(function () {
+          confetti.remove();
+        }, 6500);
+      }
+    }
+
+
+    /*
+      ارسال پیام
+    */
+
+    async function sendMessage() {
+
+      const firstName =
+        document
+          .getElementById("firstName")
+          .value
+          .trim();
+
+      const lastName =
+        document
+          .getElementById("lastName")
+          .value
+          .trim();
+
+      const message =
+        document
+          .getElementById("message")
+          .value
+          .trim();
+
+
+      const button =
+        document.getElementById("sendButton");
+
+      const success =
+        document.getElementById("success");
+
+      const error =
+        document.getElementById("error");
+
+
+      /*
+        بررسی فرم
+      */
+
+      if (firstName === "") {
+
+        alert("لطفاً نامت رو وارد کن 🌷");
+
+        return;
+      }
+
+
+      if (lastName === "") {
+
+        alert("لطفاً نام خانوادگی رو وارد کن 🌷");
+
+        return;
+      }
+
+
+      if (message === "") {
+
+        alert("لطفاً پیام تبریکت رو بنویس 💜");
+
+        return;
+      }
+
+
+      /*
+        حالت ارسال
+      */
+
+      button.disabled = true;
+
+      button.textContent =
+        "در حال ارسال... ⏳";
+
+      success.style.display = "none";
+
+      error.style.display = "none";
+
+
+      try {
+
+        const formData =
+          new URLSearchParams();
+
+        formData.append(
+          "firstName",
+          firstName
+        );
+
+        formData.append(
+          "lastName",
+          lastName
+        );
+
+        formData.append(
+          "message",
+          message
+        );
+
+
+        /*
+          ارسال به Google Apps Script
+        */
+
+        await fetch(
+          GOOGLE_SCRIPT_URL,
+          {
+            method: "POST",
+
+            mode: "no-cors",
+
+            headers: {
+              "Content-Type":
+                "application/x-www-form-urlencoded;charset=UTF-8"
+            },
+
+            body:
+              formData.toString()
+          }
+        );
+
+
+        /*
+          موفقیت
+        */
+
+        success.style.display =
+          "block";
+
+        button.textContent =
+          "✅ ارسال شد";
+
+        createConfetti(130);
+
+
+        /*
+          پاک کردن فرم
+        */
+
+        document.getElementById(
+          "firstName"
+        ).value = "";
+
+        document.getElementById(
+          "lastName"
+        ).value = "";
+
+        document.getElementById(
+          "message"
+        ).value = "";
+
+
+        /*
+          برگشت دکمه
+        */
+
+        setTimeout(function () {
+
+          button.disabled = false;
+
+          button.textContent =
+            "💌 ارسال تبریک";
+
+        }, 4000);
+
+
+      } catch (errorObject) {
+
+        console.error(
+          errorObject
+        );
+
+        error.style.display =
+          "block";
+
+        button.disabled = false;
+
+        button.textContent =
+          "💌 ارسال تبریک";
+      }
+    }
+
+  </script>
+
+</body>
+</html>
